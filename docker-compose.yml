@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis-server: 
+    image: 'redis'
+  node-app:
+    environment:
+      - ConnectionStrings=/run/secrets/connection_string
+    secrets:
+      - connection_string
+    build: .
+    ports:
+      - "4001:8000"
+secrets:
+  connection_string:
+    file: ./connection_string
